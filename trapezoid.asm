@@ -3,8 +3,6 @@
 section .text
     global trapezoid:function
     extern ifunc
-    extern printf
-    extern print_float
 
     ;---------------------------------------------------------------------------
     ; trapezoid: receive float, float, float, int

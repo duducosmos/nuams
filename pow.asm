@@ -11,7 +11,6 @@
 %endmacro
 
 %macro powi 2
-
     mov rbx, 1
     mov rcx, [%1]
     mov rax, [%1]
@@ -24,14 +23,3 @@
     %%end_while:
 %endmacro
 
-
-%macro write 1
-    push rax
-    push rcx
-    mov rdi,msg
-    mov rsi,%1
-    xor rax,rax
-    call printf
-    pop rax
-    pop rcx
-%endmacro

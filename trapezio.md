@@ -1,0 +1,1 @@
+#Regra do Trapézio recursiva

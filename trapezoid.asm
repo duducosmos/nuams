@@ -3,6 +3,7 @@
 section .text
     global trapezoid:function
     extern ifunc
+    extern printf
 
     ;---------------------------------------------------------------------------
     ; trapezoid: receive float, float, float, int
@@ -59,7 +60,6 @@ section .text
             mulss xmm0, xmm2
             jmp theend
         step2:
-
             ;--------------------
             ; n = 2 ** (k - 2)
             ;--------------------
@@ -69,7 +69,9 @@ section .text
             je n_one
             mov [tmp],rax; (k -2)
 
-            powi cnt0, tmp
+            mov rsi,[cnt0]
+            mov rdi,[tmp]
+            call powi
             mov [n],rax
 
             n_one:

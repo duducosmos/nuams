@@ -1,4 +1,7 @@
 %macro pow 2
+    ; Returns base raised to the power exponent for float base
+    ; base in %1
+    ; exponent in %2
     movss xmm0, [%1]
     mov rbx, 1
     %%while:
@@ -11,6 +14,9 @@
 %endmacro
 
 %macro powi 2
+    ; Returns base raised to the power exponent for integer base
+    ; base in %1
+    ; exponent in %2
     mov rbx, 1
     mov rcx, [%1]
     mov rax, [%1]
@@ -22,4 +28,3 @@
         jmp %%while
     %%end_while:
 %endmacro
-

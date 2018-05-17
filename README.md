@@ -18,7 +18,7 @@ The trapezoid integrate extern function with name `df_dx`.
 `df_dx` must be float type and receive a float type
 Prototype `df_dx`
 ```c
-extern void print_float(float x);
+extern void df_dx(float x);
 ```
 
 ## Compile Trapezoid

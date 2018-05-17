@@ -1,3 +1,4 @@
+
 ;-------------------------------------------------------------------------------
 ; Developed by: Eduardo S. Pereira
 ; version: 0.0.1
@@ -18,7 +19,10 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 ;-------------------------------------------------------------------------------
-
+%ifndef POW_S
+    %define POW_S
+    global powi
+    global pow
 pow:
     ;--------------------------------------------------------------------------
     ; Returns base raised to the power exponent for float base
@@ -67,3 +71,4 @@ powi:
         jmp .while
     .end_while:
     ret
+%endif

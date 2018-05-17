@@ -19,11 +19,14 @@
 ; limitations under the License.
 ;-------------------------------------------------------------------------------
 
-%include "pow.asm"
+%ifndef TRAPEZOID_S
+    %define TRAPEZOID_S
+
 
 section .text
     global trapezoid:function
     extern df_dx
+    extern powi
 
     trapezoid:
       ;-------------------------------------------------------------------------
@@ -182,3 +185,5 @@ section .data
     cnt1: dd 2.0
     cnt0: dd 2
     k: dq 0
+
+%endif

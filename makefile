@@ -1,7 +1,6 @@
 PNAME=nuasm.out
 
-C_SOURCE=$(wildcard ./source/*.c)
-
+C_SOURCE=$(shell find ./source/ ! -name "teste_*.c" -name "*.c")
 H_SOURCE=$(wildcard ./source/*.h)
 
 A_SOURCE=$(wildcard ./source/*.asm)

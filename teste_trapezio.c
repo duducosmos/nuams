@@ -2,8 +2,9 @@
 
 
 extern float trapezoid(float, float, float, int);
+extern float df_dx(float x);
 
-extern float df_dx(float x){
+float df_dx(float x){
     return x*x;
 }
 

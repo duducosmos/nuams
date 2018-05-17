@@ -14,9 +14,9 @@ trapezoid:
    ```c
    extern float trapezoid(float, float, float, int);
    ```
-The trapezoid integrate extern function with name ifun.
-ifunc must be float type and receive a float type
-Prototype ifunc
+The trapezoid integrate extern function with name `df_dx`.
+`df_dx` must be float type and receive a float type
+Prototype `df_dx`
 ```c
 extern void print_float(float x);
 ```
@@ -53,6 +53,33 @@ int main(){
 ```bash
 gcc teste_trapezio.c trapezoid.o -o trapezoid.out
 ```
+
+## Wrapper trapezoid
+
+The function `trapezoidw` is a wrapper for function trapezoid in `asm`.
+Te `trapezoidw` receive a function to be integrated as argument (float f(float x))
+
+To compile de wrapper lib:
+
+```bash
+gcc -Wall -g -c trapezoidw.c -o trapezoidw.o
+```
+
+Usage the `trapezoidw`:
+
+```c
+#include "trapezoidw.h"
+float myfunc(float x){
+  return x*x;
+}
+
+int main(){
+  float x = trapezoidw(myfunc, 0.0, 2.0, 0.0, 1);
+  printf("Integrated Value: %f\n", x);
+  return 0.0
+}
+```
+
 
 ## License:
 

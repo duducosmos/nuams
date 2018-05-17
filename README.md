@@ -57,7 +57,7 @@ gcc teste_trapezio.c trapezoid.o -o trapezoid.out
 ## Wrapper trapezoid
 
 The function `trapezoidw` is a wrapper for function trapezoid in `asm`.
-Te `trapezoidw` receive a function to be integrated as argument (float f(float x))
+The `trapezoidw` receive a function to be integrated as argument (float f(float x))
 
 To compile de wrapper lib:
 

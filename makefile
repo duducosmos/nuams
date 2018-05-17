@@ -6,13 +6,15 @@ H_SOURCE=$(wildcard ./source/*.h)
 
 A_SOURCE=$(wildcard ./source/*.asm)
 
-OBJ=$(subst .c,.o,$(subst source,objects,$(C_SOURCE)))
-OBJA=$(subst .asm,.o,$(subst source,objects,$(A_SOURCE)))
-
-CC=gcc
 SC=nasm
 SC_FLAGS=-f elf64
+SINCLUDE= -I ./source/
+OBJA=$(subst .asm,.o,$(subst source,objects,$(A_SOURCE)))
 
+OBJ=$(subst .c,.o,$(subst source,objects,$(C_SOURCE)))
+
+
+CC=gcc
 CC_FLAGS=-c         \
          -W         \
          -Wall      \
@@ -31,7 +33,7 @@ $(PNAME): $(OBJ) $(OBJA)
 
 ./objects/%.o: ./source/%.asm
 	@ echo 'Building target using NASM compiler: $<'
-	$(SC) $< $(SC_FLAGS) -o $@
+	$(SC) $< $(SC_FLAGS) $(SINCLUDE) -o $@
 	@ echo ' '
 
 

@@ -91,7 +91,7 @@ section .text
             ;--------------------
             mov rax,[k]
             sub rax,2
-            
+
             cmp rax,0
             je n_one
 
@@ -182,4 +182,3 @@ section .data
     cnt1: dd 2.0
     cnt0: dd 2
     k: dq 0
-    msg: db "Teste %d",10,0

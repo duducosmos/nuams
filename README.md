@@ -80,6 +80,11 @@ int main(){
 }
 ```
 
+compile main.c program:
+
+```bash
+gcc main.c trapezoidw.o trapezoid.o -o main.out
+```
 
 ## License:
 

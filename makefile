@@ -1,17 +1,55 @@
+PNAME=numasm.out
+
+C_SOURCE=$(wildcard ./source/*.c)
+
+H_SOURCE=$(wildcard ./source/*.h)
+
+A_SOURCE=$(wildcard ./source/*.asm)
+
+OBJ=$(subst .c,.o,$(subst source,objects,$(C_SOURCE)))
+OBJA=$(subst .asm,.o,$(subst source,objects,$(A_SOURCE)))
+
 CC=gcc
-all:main
+SC=nasm
+SC_FLAGS=-f elf64
 
-main: main.o trapezoidw.o trapezoid.o
-	$(CC) -o main.out main.o trapezoidw.o trapezoid.o
+CC_FLAGS=-c         \
+         -W         \
+         -Wall      \
+         -ansi      \
+         -pedantic
 
-main.o: main.c trapezoidw.h
-	$(CC) -o main.o main.c -c -W -Wall -ansi -pedantic
+RM = rm -rf
 
-trapezoidw.o: trapezoidw.c trapezoidw.h
-	$(CC) -Wall -g -c trapezoidw.c -o trapezoidw.o
+all: objFolder $(PNAME)
 
-trapezoid.o: trapezoid.asm
-	nasm -f elf64 trapezoid.asm
+$(PNAME): $(OBJ) $(OBJA)
+	@ echo 'Building binary using GCC linker: $@'
+	$(CC) $^ -o $@
+	@ echo 'Finished building binary: $@'
+	@ echo ' '
+
+./objects/%.o: ./source/%.asm
+	@ echo 'Building target using NASM compiler: $<'
+	$(SC) $< $(SC_FLAGS) -o $@
+	@ echo ' '
+
+
+./objects/%.o: ./source/%.c ./source/%.h
+	@ echo 'Building target using GCC compiler: $<'
+	$(CC) $< $(CC_FLAGS) -o $@
+	@ echo ' '
+
+./objects/main.o: ./source/main.c $(H_SOURCE)
+	@ echo 'Building target using GCC compiler: $<'
+	$(CC) $< $(CC_FLAGS) -o $@
+	@ echo ''
+
+objFolder:
+	@ mkdir -p objects
 
 clean:
-	rm -rf *.o *~ main.out
+	@ $(RM) ./objects/*.o $(PROJ_NAME) *~
+	@ rmdir objects
+
+.PHONY: all clean

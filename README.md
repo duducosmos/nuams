@@ -101,3 +101,17 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+
+
+#teste
+```asm
+push rax
+push rcx
+mov rdi,msg
+mov rsi,[n]
+xor rax,rax
+call printf
+pop rax
+pop rcx
+```

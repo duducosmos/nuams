@@ -33,7 +33,6 @@ float trapezoidw(float (*func)(float x), float a, float b, float iold, int n){
      the old integration an the step integration
   */
   wfunc = &(*func);
-  float x = trapezoid(a, b, iold, n);
-  return x;
+  return trapezoid(a, b, iold, n);
 
 }

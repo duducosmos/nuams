@@ -1,4 +1,4 @@
-PNAME=numasm.out
+PNAME=nuasm.out
 
 C_SOURCE=$(wildcard ./source/*.c)
 

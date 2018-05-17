@@ -23,20 +23,25 @@
 
 section .text
     global trapezoid:function
-    extern ifunc
-
-    ;---------------------------------------------------------------------------
-    ; trapezoid: receive float, float, float, int
-    ;                    xmm0, xmm1, xmm2, rsi
-    ; ifunc must be float type and receive a float type
-    ; float ifunc(float)
-    ;
-    ; I_k(h) = [(1/2) * I_{k-1}(2h)] + {h*sum[f(x_new)]}
-    ; h = H / n
-    ; H = b - a
-    ;---------------------------------------------------------------------------
+    extern df_dx
 
     trapezoid:
+      ;-------------------------------------------------------------------------
+      ; trapezoid:
+      ;     receive float, float, float and int on xmm0, xmm1, xmm2, rsi
+      ;     return the Trapezoidal integration of external function df_dx
+      ;     on xmm0;
+      ;
+      ;     df_dx must be float type (return on xmm0)
+      ;     and receive a float type (on xmm0): float df_dx(float);
+      ;
+      ;
+      ; I_k(h) = [(1/2) * I_{k-1}(2h)] + {h*sum[f(x_new)]}
+      ; h = H / n
+      ; H = b - a
+      ;
+      ;-------------------------------------------------------------------------
+
         mov [k], rdi
         movss [a], xmm0
         movss [b], xmm1
@@ -54,7 +59,7 @@ section .text
             ; f(a)
             movss xmm0, [a]
             sub rsp,8
-            call ifunc
+            call df_dx
             add rsp,8
 
             movss xmm1,xmm0
@@ -62,7 +67,7 @@ section .text
             ;f(b)
             movss xmm0, [b]
             sub rsp,8
-            call ifunc
+            call df_dx
             add rsp,8
 
             ;xmm2 = f(a) + f(b)
@@ -78,6 +83,7 @@ section .text
             movss xmm1,[cnt1]
             divss xmm0,xmm1
             mulss xmm0, xmm2
+
             jmp theend
         step2:
             ;--------------------
@@ -85,8 +91,10 @@ section .text
             ;--------------------
             mov rax,[k]
             sub rax,2
+            
             cmp rax,0
             je n_one
+
             mov [tmp],rax; (k -2)
 
             mov rsi,[cnt0]
@@ -130,7 +138,7 @@ section .text
                 ;--------------------
                 movss xmm0, [x]
                 sub rsp,8
-                call ifunc
+                call df_dx
                 add rsp,8
 
                 ;--------------------

@@ -34,7 +34,7 @@ nasm -f elf64 trapezoid.asm
 
 extern float trapezoid(float, float, float, int);
 
-extern float ifunc(float x){
+extern float df_dx(float x){
     return x*x;
 }
 
